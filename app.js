@@ -3,8 +3,8 @@ Ext.Loader.setConfig({
 });
 
 Ext.application({
-    name: 'ToDo',	
-	autoCreateViewport: true,
+    name: 'ToDo',
+    autoCreateViewport: true,
 
     controllers: [
         'ToDos'

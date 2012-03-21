@@ -1,8 +1,8 @@
 Ext.define('ToDo.view.todo.List', {
-	extend: 'Ext.grid.Panel',
+    extend: 'Ext.grid.Panel',
 
-	alias: 'widget.todolist',
-	title: 'What To Do List:',
+    alias: 'widget.todolist',
+    title: 'What To Do List:',
     enableColumnHide: false,
     columnLines: true,
 
@@ -14,7 +14,7 @@ Ext.define('ToDo.view.todo.List', {
         })
     ],
 
-	initComponent: function() {
+    initComponent: function() {
         this.columns = [{
             header: 'Job',
             dataIndex: 'toDo',
@@ -61,7 +61,6 @@ Ext.define('ToDo.view.todo.List', {
             displayInfo: true
         }];
 
-		this.callParent();
-	}
+        this.callParent();
+    }
 });
-			
