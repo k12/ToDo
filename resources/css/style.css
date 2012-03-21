@@ -1,0 +1,15 @@
+body {
+	background-color: #064167;
+}
+
+.add-icon {
+    background-image: url(../images/add.gif);
+}
+
+.save-icon {
+    background-image: url(../images/disk.png);
+}
+
+.delete-icon {
+    background-image: url(../images/delete.gif);
+}
