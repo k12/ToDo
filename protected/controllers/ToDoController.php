@@ -1,6 +1,6 @@
 <?php
 
-class SiteController extends Controller
+class ToDoController extends Controller
 {
 	/**
 	 * Declares class-based actions.

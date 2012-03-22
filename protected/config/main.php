@@ -8,6 +8,7 @@
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'ToDo',
+    'defaultController'=>'todo',
 
 	// preloading 'log' component
 	'preload'=>array('log'),
@@ -62,7 +63,7 @@ return array(
 		*/
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
-            'errorAction'=>'site/error',
+            'errorAction'=>'todo/error',
         ),
 		'log'=>array(
 			'class'=>'CLogRouter',
