@@ -10,7 +10,7 @@ class ToDoController extends CController
     public function actionRead($page, $start, $limit)
     {
         if(Yii::app()->request->isAjaxRequest) {
-            $todos = ToDos::model()->findAll(array(
+            $todos = ToDo::model()->findAll(array(
                 'select'=>'*',
                 'offset'=>$start,
                 'limit'=>$limit,
@@ -18,7 +18,7 @@ class ToDoController extends CController
             ));
 
             $respond['success'] = true;
-            $respond['total'] = ToDos::model()->count();
+            $respond['total'] = ToDo::model()->count();
 
             foreach($todos as $todo) {
                 $respond['todos'][] = $todo->attributes;
@@ -34,7 +34,7 @@ class ToDoController extends CController
             $rawData = file_get_contents('php://input');
             $data = json_decode($rawData, true);
 
-            $respond['success'] = (ToDos::model()->deleteByPk($data['id'])) ? true : false;
+            $respond['success'] = (ToDo::model()->deleteByPk($data['id'])) ? true : false;
 
             echo json_encode($respond);
         }
@@ -46,7 +46,7 @@ class ToDoController extends CController
             $rawData = file_get_contents('php://input');
             $data = json_decode($rawData, true);
 
-            $toDo = new ToDos;
+            $toDo = new ToDo;
             $toDo->toDo = $data['toDo'];
             $toDo->createdAt = date('Y-m-d');
 
@@ -68,7 +68,7 @@ class ToDoController extends CController
             $rawData = file_get_contents('php://input');
             $data = json_decode($rawData, true);
 
-            $toDo = ToDos::model()->findByPk($data['id']);
+            $toDo = ToDo::model()->findByPk($data['id']);
             $toDo->toDo = $data['toDo'];
 
             if($toDo->save()) {

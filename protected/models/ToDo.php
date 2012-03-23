@@ -8,7 +8,7 @@
  * @property string $toDo
  * @property string $createdAt
  */
-class ToDos extends CActiveRecord
+class ToDo extends CActiveRecord
 {
     /**
      * Returns the static model of the specified AR class.
