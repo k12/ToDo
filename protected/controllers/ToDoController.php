@@ -9,30 +9,57 @@ class ToDoController extends CController
 
     public function actionRead($page, $start, $limit)
     {
-        $todos = ToDos::model()->findAll(array(
-            'select'=>'*',
-            'offset'=>$start,
-            'limit'=>$limit
-        ));
+        if(Yii::app()->request->isAjaxRequest) {
+            $todos = ToDos::model()->findAll(array(
+                'select'=>'*',
+                'offset'=>$start,
+                'limit'=>$limit,
+                'order'=>'id DESC'
+            ));
 
-        $respond['success'] = true;
-        $respond['total'] = ToDos::model()->count();
+            $respond['success'] = true;
+            $respond['total'] = ToDos::model()->count();
 
-        foreach($todos as $todo) {
-            $respond['todos'][] = $todo->attributes;
+            foreach($todos as $todo) {
+                $respond['todos'][] = $todo->attributes;
+            }
+
+            echo json_encode($respond);
         }
-
-        echo json_encode($respond);
     }
 
     public function actionDelete()
     {
-        $rawData = file_get_contents('php://input');
-        $data = json_decode($rawData, true);
+        if(Yii::app()->request->isAjaxRequest) {
+            $rawData = file_get_contents('php://input');
+            $data = json_decode($rawData, true);
 
-        $respond['success'] = (ToDos::model()->deleteByPk($data['id'])) ? true : false;
+            $respond['success'] = (ToDos::model()->deleteByPk($data['id'])) ? true : false;
 
-        echo json_encode($respond);
+            echo json_encode($respond);
+        }
+    }
+
+    public function actionCreate()
+    {
+        if(Yii::app()->request->isAjaxRequest) {
+            $rawData = file_get_contents('php://input');
+            $data = json_decode($rawData, true);
+
+            $toDo = new ToDos;
+            $toDo->toDo = $data['toDo'];
+            $toDo->createdAt = date('Y-m-d');
+
+            if($toDo->save()) {
+                $respond['success'] = true;
+                $respond['todos'][] = $toDo->attributes;
+            }
+            else {
+                $respond['success'] = false;
+            }
+
+            echo json_encode($respond);
+        }
     }
 
     public function actionError()
