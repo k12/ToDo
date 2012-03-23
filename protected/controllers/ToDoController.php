@@ -62,6 +62,27 @@ class ToDoController extends CController
         }
     }
 
+    public function actionUpdate()
+    {
+        if(Yii::app()->request->isAjaxRequest) {
+            $rawData = file_get_contents('php://input');
+            $data = json_decode($rawData, true);
+
+            $toDo = ToDos::model()->findByPk($data['id']);
+            $toDo->toDo = $data['toDo'];
+
+            if($toDo->save()) {
+                $respond['success'] = true;
+                $respond['todos'][] = $toDo->attributes;
+            }
+            else {
+                $respond['success'] = false;
+            }
+
+            echo json_encode($respond);
+        }
+    }
+
     public function actionError()
     {
         if($error=Yii::app()->errorHandler->error)
