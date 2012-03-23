@@ -1,9 +1,7 @@
 <?php
 
-class ToDoController extends Controller
+class ToDoController extends CController
 {
-    public  $layout = 'main';
-
     public function actionIndex()
     {
         $this->render('index');
