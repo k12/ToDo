@@ -7,6 +7,24 @@ class ToDoController extends CController
         $this->render('index');
     }
 
+    public function actionRead($page, $start, $limit)
+    {
+        $todos = ToDos::model()->findAll(array(
+            'select'=>'*',
+            'offset'=>$start,
+            'limit'=>$limit
+        ));
+
+        $respond['success'] = true;
+        $respond['total'] = ToDos::model()->count();
+
+        foreach($todos as $todo) {
+            $respond['todos'][] = $todo->attributes;
+        }
+
+        echo json_encode($respond);
+    }
+
     public function actionError()
     {
         if($error=Yii::app()->errorHandler->error)
