@@ -25,6 +25,16 @@ class ToDoController extends CController
         echo json_encode($respond);
     }
 
+    public function actionDelete()
+    {
+        $rawData = file_get_contents('php://input');
+        $data = json_decode($rawData, true);
+
+        $respond['success'] = (ToDos::model()->deleteByPk($data['id'])) ? true : false;
+
+        echo json_encode($respond);
+    }
+
     public function actionError()
     {
         if($error=Yii::app()->errorHandler->error)
