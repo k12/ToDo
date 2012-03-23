@@ -9,10 +9,10 @@ Ext.define('ToDo.store.ToDos', {
     proxy: {
         type: 'ajax',
         api: {
-            read: 'php/read.php',
-            update: 'php/update.php',
-            destroy: 'php/delete.php',
-            create: 'php/create.php'
+            read: 'todo/read',
+            update: 'todo/update',
+            destroy: 'todo/delete',
+            create: 'todo/create'
         },
         reader: {
             type: 'json',
