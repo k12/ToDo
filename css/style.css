@@ -8,6 +8,14 @@ body {
     color: #fff;
 }
 
+.add-icon {
+    background-image: url(../images/add.gif);
+}
+
+.delete-icon {
+    background-image: url(../images/delete.gif);
+}
+
 .error {
     margin: 15px;
     padding: 15px;
