@@ -50,7 +50,8 @@ Ext.define('ToDo.view.todo.List', {
 
                     if (selection) {
                         store.remove(selection);
-                        pagingTB.doRefresh();
+                        store.totalCount--;
+                        pagingTB.updateInfo();
                     }
                 }
             }]
