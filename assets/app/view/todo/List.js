@@ -44,12 +44,13 @@ Ext.define('ToDo.view.todo.List', {
                 iconCls: 'delete-icon',
                 handler: function(){
                     var store = Ext.getStore('ToDos'),
+                        pagingTB = Ext.getCmp('toDoPagingTB'),
                         list = Ext.getCmp('toDoList'),
                         selection = list.getSelectionModel().getSelection()[0];
 
                     if (selection) {
                         store.remove(selection);
-                        store.loadPage(store.currentPage);
+                        pagingTB.doRefresh();
                     }
                 }
             }]
@@ -58,7 +59,8 @@ Ext.define('ToDo.view.todo.List', {
             xtype: 'pagingtoolbar',
             store: 'ToDos',
             dock: 'bottom',
-            displayInfo: true
+            displayInfo: true,
+            id: 'toDoPagingTB'
         }];
 
         this.callParent();
