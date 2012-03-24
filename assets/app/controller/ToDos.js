@@ -14,7 +14,8 @@ Ext.define('ToDo.controller.ToDos', {
     },
 
     addToDo: function(button) {
-        var toDo = Ext.getCmp('toDoTextField').getValue(),
+        var pagingTB = Ext.getCmp('toDoPagingTB'),
+            toDo = Ext.getCmp('toDoTextField').getValue(),
             model = new ToDo.model.ToDo({toDo: toDo}),
             store = Ext.getStore('ToDos'),
             win = button.up('window'),
@@ -23,7 +24,8 @@ Ext.define('ToDo.controller.ToDos', {
         if (form.isValid())
         {
             store.insert(0, model);
-            store.load();
+            store.totalCount++;
+            pagingTB.updateInfo();
             win.close();
         }
     }
