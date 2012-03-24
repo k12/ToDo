@@ -31,8 +31,7 @@ class ToDoController extends CController
     public function actionDelete()
     {
         if(Yii::app()->request->isAjaxRequest) {
-            $rawData = file_get_contents('php://input');
-            $data = json_decode($rawData, true);
+            $data = $this->getRequestPayloadData();
 
             $respond['success'] = (ToDo::model()->deleteByPk($data['id'])) ? true : false;
 
@@ -43,8 +42,7 @@ class ToDoController extends CController
     public function actionCreate()
     {
         if(Yii::app()->request->isAjaxRequest) {
-            $rawData = file_get_contents('php://input');
-            $data = json_decode($rawData, true);
+            $data = $this->getRequestPayloadData();
 
             $toDo = new ToDo;
             $toDo->toDo = $data['toDo'];
@@ -65,8 +63,7 @@ class ToDoController extends CController
     public function actionUpdate()
     {
         if(Yii::app()->request->isAjaxRequest) {
-            $rawData = file_get_contents('php://input');
-            $data = json_decode($rawData, true);
+            $data = $this->getRequestPayloadData();
 
             $toDo = ToDo::model()->findByPk($data['id']);
             $toDo->toDo = $data['toDo'];
@@ -92,5 +89,11 @@ class ToDoController extends CController
             else
                 $this->render('error', $error);
         }
+    }
+
+    private function getRequestPayloadData()
+    {
+        $data = file_get_contents('php://input');
+        return json_decode($data, true);
     }
 }
