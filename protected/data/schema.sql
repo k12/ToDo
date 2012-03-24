@@ -33,19 +33,6 @@ CREATE TABLE IF NOT EXISTS `todos` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=62 ;
 
---
--- Zrzut danych tabeli `todos`
---
-
-INSERT INTO `todos` (`id`, `toDo`, `createdAt`) VALUES
-(30, 'fds', '2012-03-21'),
-(31, 'gre', '2012-03-21'),
-(32, 'htr', '2012-03-21'),
-(37, 'aaa', '2012-03-21'),
-(38, 'fff', '2012-03-21'),
-(44, 'ghb', '2012-03-21'),
-(50, 'jty', '2012-03-21');
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
