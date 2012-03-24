@@ -18,6 +18,7 @@ Ext.define('ToDo.view.todo.List', {
         this.columns = [{
             header: 'Job',
             dataIndex: 'toDo',
+            renderer: Ext.util.Format.htmlEncode,
             flex: 3,
             editor: {
                 xtype: 'textfield',
@@ -26,7 +27,8 @@ Ext.define('ToDo.view.todo.List', {
         },
         {
             header: 'Created At',
-            dataIndex: 'createdAt'
+            dataIndex: 'createdAt',
+            renderer: Ext.util.Format.htmlEncode
         }];
 
         this.dockedItems = [{
