@@ -5,7 +5,6 @@
 
 body {
     background-color: #064167;
-    color: #fff;
 }
 
 .add-icon {
@@ -17,6 +16,7 @@ body {
 }
 
 .error {
+    color: #fff;
     margin: 15px;
     padding: 15px;
     border: 1px solid #088999;
