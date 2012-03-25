@@ -8,7 +8,6 @@
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->baseUrl; ?>/css/style.css">
 
     <script type="text/javascript" src="http://extjs.cachefly.net/ext-4.0.2a/ext-all-debug.js"></script>
-    <script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/assets/app.js"></script>
 </head>
 
 <body>
