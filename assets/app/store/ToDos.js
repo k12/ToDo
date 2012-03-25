@@ -24,6 +24,16 @@ Ext.define('ToDo.store.ToDos', {
             type: 'json',
             writeAllFields: true,
             successProperty: 'success'
+        },
+        listeners: {
+            exception: function(proxy, response, operation){
+                Ext.MessageBox.show({
+                    title: 'REMOTE EXCEPTION',
+                    msg: 'Error: ' + response.status + '<br />Message: ' + response.statusText,
+                    icon: Ext.MessageBox.ERROR,
+                    buttons: Ext.Msg.OK
+                });
+            }
         }
     }
 });
