@@ -6,6 +6,7 @@
  * The followings are the available columns in table 'todos':
  * @property integer $id
  * @property string $toDo
+ * @property string $dueDate
  * @property string $createdAt
  */
 class ToDo extends CActiveRecord
@@ -40,7 +41,7 @@ class ToDo extends CActiveRecord
             array('toDo', 'length', 'max'=>255),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, toDo, createdAt', 'safe', 'on'=>'search'),
+            array('id, toDo, dueDate, createdAt', 'safe', 'on'=>'search'),
         );
     }
 
@@ -63,6 +64,7 @@ class ToDo extends CActiveRecord
         return array(
             'id' => 'ID',
             'toDo' => 'To Do',
+            'dueDate' => 'Due Date',
             'createdAt' => 'Created At',
         );
     }
@@ -80,6 +82,7 @@ class ToDo extends CActiveRecord
 
         $criteria->compare('id',$this->id);
         $criteria->compare('toDo',$this->toDo,true);
+        $criteria->compare('dueDate',$this->dueDate,true);
         $criteria->compare('createdAt',$this->createdAt,true);
 
         return new CActiveDataProvider($this, array(

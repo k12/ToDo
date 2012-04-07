@@ -16,7 +16,8 @@ Ext.define('ToDo.controller.ToDos', {
     addToDo: function(button) {
         var pagingTB = Ext.getCmp('toDoPagingTB'),
             toDo = Ext.getCmp('toDoTextField').getValue(),
-            model = new ToDo.model.ToDo({toDo: toDo}),
+            dueDate = Ext.util.Format.date(Ext.getCmp('dueDateField').getValue(), 'Y-m-d'),
+            model = new ToDo.model.ToDo({toDo: toDo, dueDate: dueDate}),
             store = Ext.getStore('ToDos'),
             win = button.up('window'),
             form = win.down('form').getForm();

@@ -46,6 +46,7 @@ class TodoController extends CController
 
             $toDo = new ToDo;
             $toDo->toDo = $data['toDo'];
+            $toDo->dueDate = $data['dueDate'];
             $toDo->createdAt = date('Y-m-d');
 
             if($toDo->save()) {

@@ -18,10 +18,19 @@ Ext.define('ToDo.view.todo.Add', {
                         msgTarget: 'under',
                         fieldLabel: 'Job',
                         width: 350,
-                        labelWidth: 30,
+                        labelWidth: 70,
                         allowBlank: false,
                         margin: 10,
                         emptyText: 'What to do, sir?'
+                    }, {
+                        xtype: 'datefield',
+                        name: 'dueDate',
+                        id: 'dueDateField',
+                        msgTarget: 'under',
+                        fieldLabel: 'Due Date',
+                        width: 350,
+                        labelWidth: 70,
+                        margin: 10
                     }
                 ]
             }
