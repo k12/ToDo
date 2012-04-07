@@ -30,7 +30,8 @@ Ext.define('ToDo.view.todo.Add', {
                         fieldLabel: 'Due Date',
                         width: 350,
                         labelWidth: 70,
-                        margin: 10
+                        margin: 10,
+                        format: 'Y-m-d'
                     }
                 ]
             }
