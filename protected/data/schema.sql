@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Czas wygenerowania: 21 Mar 2012, 22:51
+-- Czas wygenerowania: 07 Kwi 2012, 12:49
 -- Wersja serwera: 5.5.16
 -- Wersja PHP: 5.3.8
 
@@ -29,9 +29,10 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `todos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `toDo` varchar(255) NOT NULL,
+  `dueDate` date DEFAULT NULL,
   `createdAt` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=62 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
