@@ -26,8 +26,8 @@ Ext.define('ToDo.view.todo.List', {
             }
         },
         {
-            header: 'Created At',
-            dataIndex: 'createdAt',
+            header: 'Due Date',
+            dataIndex: 'dueDate',
             renderer: Ext.util.Format.htmlEncode
         }];
 
