@@ -68,6 +68,7 @@ class TodoController extends CController
 
             $toDo = ToDo::model()->findByPk($data['id']);
             $toDo->toDo = $data['toDo'];
+            $toDo->dueDate = date('Y-m-d', strtotime($data['dueDate'])); //FIXIT: it should be done by client side not server
 
             if($toDo->save()) {
                 $respond['success'] = true;

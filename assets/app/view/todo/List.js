@@ -28,7 +28,12 @@ Ext.define('ToDo.view.todo.List', {
         {
             header: 'Due Date',
             dataIndex: 'dueDate',
-            renderer: Ext.util.Format.htmlEncode
+            renderer: Ext.util.Format.htmlEncode,
+            editor: {
+                xtype: 'datefield',
+                allowBlank: false,
+                format: 'Y-m-d'
+            }
         }];
 
         this.dockedItems = [{
