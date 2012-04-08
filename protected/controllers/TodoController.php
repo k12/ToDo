@@ -33,7 +33,18 @@ class TodoController extends CController
         if(Yii::app()->request->isAjaxRequest) {
             $data = $this->getRequestPayloadData();
 
-            $respond['success'] = (ToDo::model()->deleteByPk($data['id'])) ? true : false;
+            if ($this->isNested($data))
+            {
+                foreach ($data as $todo)
+                {
+                    ToDo::model()->deleteByPk($todo['id']); //FIXIT: should be one "big" query - not deleting one row by one
+                }
+
+                $respond['success'] = true; //FIXIT: always true? I dont think so...
+            }
+            else {
+                $respond['success'] = (ToDo::model()->deleteByPk($data['id'])) ? true : false;
+            }
 
             echo json_encode($respond);
         }
@@ -97,5 +108,16 @@ class TodoController extends CController
     {
         $data = file_get_contents('php://input');
         return json_decode($data, true);
+    }
+
+    private function isNested($array)
+    {
+        foreach($array as $item) {
+            if (is_array($item)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

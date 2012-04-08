@@ -38,10 +38,11 @@ class ToDo extends CActiveRecord
         // will receive user inputs.
         return array(
             array('toDo, createdAt', 'required'),
-            array('toDo', 'length', 'max'=>255),
+            array('toDo', 'length', 'max' => 255),
+            array('dueDate', 'default', 'value' => null),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, toDo, dueDate, createdAt', 'safe', 'on'=>'search'),
+            array('id, toDo, dueDate, createdAt', 'safe', 'on' => 'search'),
         );
     }
 

@@ -26,6 +26,7 @@ Ext.define('ToDo.controller.ToDos', {
         {
             store.insert(0, model);
             store.totalCount++;
+            store.sync();
             pagingTB.updateInfo();
             win.close();
         }

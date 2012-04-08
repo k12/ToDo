@@ -5,14 +5,23 @@ Ext.define('ToDo.view.todo.List', {
     title: 'What To Do List:',
     enableColumnHide: false,
     columnLines: true,
+    multiSelect: true,
 
     store: 'ToDos',
 
     plugins: [
         Ext.create('Ext.grid.plugin.CellEditing', {
-            clicksToEdit: 2
+            clicksToEdit: 2,
+            listeners: {
+                edit: function(editor, e) {
+                    var store = Ext.getStore('ToDos');
+                    store.sync();
+                }
+            }
         })
     ],
+
+    selModel: Ext.create('Ext.selection.CheckboxModel'),
 
     initComponent: function() {
         this.columns = [{
@@ -28,6 +37,8 @@ Ext.define('ToDo.view.todo.List', {
         {
             header: 'Due Date',
             dataIndex: 'dueDate',
+            xtype: 'datecolumn',
+            format: 'Y-m-d',
             renderer: Ext.util.Format.htmlEncode,
             editor: {
                 xtype: 'datefield',
@@ -53,12 +64,18 @@ Ext.define('ToDo.view.todo.List', {
                     var store = Ext.getStore('ToDos'),
                         pagingTB = Ext.getCmp('toDoPagingTB'),
                         list = Ext.getCmp('toDoList'),
-                        selection = list.getSelectionModel().getSelection()[0];
+                        selections = list.getSelectionModel().getSelection();
 
-                    if (selection) {
-                        store.remove(selection);
-                        store.totalCount--;
-                        pagingTB.updateInfo();
+                    if (selections.length > 0) {
+                        Ext.MessageBox.confirm('Confirm', 'Are you sure?', function(btn) {
+                            if (btn == 'yes'){
+                                store.remove(selections);
+                                store.totalCount -= selections.length;
+                                store.sync();
+                                pagingTB.updateInfo();
+                                list.getSelectionModel().deselectAll();
+                            }
+                        });
                     }
                 }
             }]

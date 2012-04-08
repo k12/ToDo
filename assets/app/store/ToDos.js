@@ -2,7 +2,7 @@ Ext.define('ToDo.store.ToDos', {
     extend: 'Ext.data.Store',
 
     model: 'ToDo.model.ToDo',
-    autoSync: true,
+    autoSync: false,
     pageSize: 25,
     autoLoad: {start: 0, limit: this.pageSize},
 
