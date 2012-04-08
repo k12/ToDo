@@ -45,6 +45,28 @@ Ext.define('ToDo.view.todo.List', {
                 allowBlank: false,
                 format: 'Y-m-d'
             }
+        },
+        {
+            xtype: 'actioncolumn',
+            width: 40,
+            align: 'center',
+            items: [{
+                icon   : 'images/delete.gif',
+                tooltip: 'Delete',
+                handler: function(grid, rowIndex, colIndex) {
+                    var store = Ext.getStore('ToDos'),
+                        pagingTB = Ext.getCmp('toDoPagingTB');
+
+                    Ext.MessageBox.confirm('Confirm', 'Are you sure?', function(btn) {
+                        if (btn == 'yes') {
+                            store.remove(store.getAt(rowIndex));
+                            store.totalCount--;
+                            store.sync();
+                            pagingTB.updateInfo();
+                        }
+                    });
+                }
+            }]
         }];
 
         this.dockedItems = [{
