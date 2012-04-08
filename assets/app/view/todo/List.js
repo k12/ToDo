@@ -74,6 +74,7 @@ Ext.define('ToDo.view.todo.List', {
             items: [{
                 text: 'Add',
                 iconCls: 'add-icon',
+                tooltip: 'Add New',
                 handler: function(){
                     var view = Ext.widget('todoadd');
                 }
@@ -82,6 +83,7 @@ Ext.define('ToDo.view.todo.List', {
             {
                 text: 'Delete',
                 iconCls: 'delete-icon',
+                tooltip: 'Delete Selected',
                 handler: function(){
                     var store = Ext.getStore('ToDos'),
                         pagingTB = Ext.getCmp('toDoPagingTB'),
