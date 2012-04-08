@@ -72,11 +72,43 @@ Ext.define('ToDo.view.todo.List', {
         this.dockedItems = [{
             xtype: 'toolbar',
             items: [{
+                xtype: 'textfield',
+                name: 'todo',
+                id: 'toDoTextField',
+                allowBlank: false,
+                width: 250,
+                emptyText: 'What to do, sir?'
+            }, {
+                xtype: 'datefield',
+                name: 'dueDate',
+                id: 'dueDateField',
+                msgTarget: 'under',
+                width: 100,
+                format: 'Y-m-d'
+            }, {
                 text: 'Add',
                 iconCls: 'add-icon',
                 tooltip: 'Add New',
                 handler: function(){
-                    var view = Ext.widget('todoadd');
+                    //var view = Ext.widget('todoadd');
+                    var pagingTB = Ext.getCmp('toDoPagingTB'),
+                        toDoTextField = Ext.getCmp('toDoTextField');
+                        dueDateField = Ext.getCmp('dueDateField');
+                        toDo = toDoTextField.getValue(),
+                        dueDate = Ext.util.Format.date(dueDateField.getValue(), 'Y-m-d'),
+                        model = new ToDo.model.ToDo({toDo: toDo, dueDate: dueDate}),
+                        store = Ext.getStore('ToDos');
+
+                    if (toDoTextField.isValid() && dueDateField.isValid())
+                    {
+                        store.insert(0, model);
+                        store.totalCount++;
+                        store.sync();
+                        pagingTB.updateInfo();
+
+                        toDoTextField.reset();
+                        dueDateField.reset();
+                    }
                 }
             },
             '-',
