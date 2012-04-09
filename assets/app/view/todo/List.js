@@ -9,6 +9,13 @@ Ext.define('ToDo.view.todo.List', {
 
     store: 'ToDos',
 
+    viewConfig: {
+        plugins: {
+            ptype: 'gridviewdragdrop',
+            dragText: 'Drag and drop to reorganize'
+        }
+    },
+
     plugins: [
         Ext.create('Ext.grid.plugin.CellEditing', {
             clicksToEdit: 2,
