@@ -43,9 +43,17 @@ Ext.define('ToDo.view.todo.List', {
         }, {
             header: 'Due Date',
             dataIndex: 'dueDate',
-            xtype: 'datecolumn',
-            format: 'Y-m-d',
-            renderer: Ext.util.Format.htmlEncode,
+            renderer: function(date, metadata, record, rowIndex){
+                var now = Ext.util.Format.date(new Date, 'Y-m-d');
+                date = Ext.util.Format.date(date, 'Y-m-d');
+
+                if (date < now && date)
+                {
+                    metadata.style = 'color: #DD0000';
+                }
+
+                return date;
+            },
             editor: {
                 xtype: 'datefield',
                 allowBlank: false,
@@ -114,6 +122,17 @@ Ext.define('ToDo.view.todo.List', {
         }];
 
         this.callParent();
+    },
+
+    dueDateRender: function(val)
+    {
+        console.log('test');
+        if(val > 0){
+            return '<span style="color:green;">' + val + '</span>';
+        }else if(val < 0){
+            return '<span style="color:red;">' + val + '</span>';
+        }
+        return val;
     },
 
     onAddClick: function()
