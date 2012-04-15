@@ -34,14 +34,13 @@ Ext.define('ToDo.view.todo.List', {
         this.columns = [{
             header: 'Job',
             dataIndex: 'toDo',
-            renderer: Ext.util.Format.htmlEncode,
             flex: 3,
+            renderer: Ext.util.Format.htmlEncode,
             editor: {
                 xtype: 'textfield',
                 allowBlank: false
             }
-        },
-        {
+        }, {
             header: 'Due Date',
             dataIndex: 'dueDate',
             xtype: 'datecolumn',
@@ -52,8 +51,7 @@ Ext.define('ToDo.view.todo.List', {
                 allowBlank: false,
                 format: 'Y-m-d'
             }
-        },
-        {
+        }, {
             xtype: 'actioncolumn',
             width: 40,
             align: 'center',
@@ -76,7 +74,7 @@ Ext.define('ToDo.view.todo.List', {
                 listeners: {
                     specialkey: function(field, e){
                         if (e.getKey() == e.ENTER) {
-                            //onAddClick();
+                            //this.onAddClick();
                         }
                     }
                 }
@@ -89,7 +87,7 @@ Ext.define('ToDo.view.todo.List', {
                 listeners: {
                     specialkey: function(field, e){
                         if (e.getKey() == e.ENTER) {
-                            //onAddClick();
+                            //this.onAddClick();
                         }
                     }
                 }
@@ -128,7 +126,6 @@ Ext.define('ToDo.view.todo.List', {
             model = new ToDo.model.ToDo({toDo: toDo, dueDate: dueDate}),
             store = Ext.getStore('ToDos');
 
-        console.log('fewfw');
         if (toDoTextField.isValid() && dueDateField.isValid())
         {
             store.insert(0, model);
