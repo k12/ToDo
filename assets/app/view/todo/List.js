@@ -60,19 +60,7 @@ Ext.define('ToDo.view.todo.List', {
             items: [{
                 icon   : 'images/delete.gif',
                 tooltip: 'Delete',
-                handler: function(grid, rowIndex, colIndex) {
-                    var store = Ext.getStore('ToDos'),
-                        pagingTB = Ext.getCmp('toDoPagingTB');
-
-                    Ext.MessageBox.confirm('Confirm', 'Are you sure?', function(btn) {
-                        if (btn == 'yes') {
-                            store.remove(store.getAt(rowIndex));
-                            store.totalCount--;
-                            store.sync();
-                            pagingTB.updateInfo();
-                        }
-                    });
-                }
+                handler: this.onRowDeleteClick
             }]
         }];
 
@@ -84,63 +72,39 @@ Ext.define('ToDo.view.todo.List', {
                 id: 'toDoTextField',
                 allowBlank: false,
                 width: 250,
-                emptyText: 'What to do, sir?'
+                emptyText: 'What to do, sir?',
+                listeners: {
+                    specialkey: function(field, e){
+                        if (e.getKey() == e.ENTER) {
+                            //onAddClick();
+                        }
+                    }
+                }
             }, {
                 xtype: 'datefield',
                 name: 'dueDate',
                 id: 'dueDateField',
-                msgTarget: 'under',
                 width: 100,
-                format: 'Y-m-d'
+                format: 'Y-m-d',
+                listeners: {
+                    specialkey: function(field, e){
+                        if (e.getKey() == e.ENTER) {
+                            //onAddClick();
+                        }
+                    }
+                }
             }, {
                 text: 'Add',
                 iconCls: 'add-icon',
                 tooltip: 'Add New',
-                handler: function(){
-                    //var view = Ext.widget('todoadd');
-                    var pagingTB = Ext.getCmp('toDoPagingTB'),
-                        toDoTextField = Ext.getCmp('toDoTextField');
-                        dueDateField = Ext.getCmp('dueDateField');
-                        toDo = toDoTextField.getValue(),
-                        dueDate = Ext.util.Format.date(dueDateField.getValue(), 'Y-m-d'),
-                        model = new ToDo.model.ToDo({toDo: toDo, dueDate: dueDate}),
-                        store = Ext.getStore('ToDos');
-
-                    if (toDoTextField.isValid() && dueDateField.isValid())
-                    {
-                        store.insert(0, model);
-                        store.totalCount++;
-                        store.sync();
-                        pagingTB.updateInfo();
-
-                        toDoTextField.reset();
-                        dueDateField.reset();
-                    }
-                }
+                handler: this.onAddClick
             },
             '-',
             {
                 text: 'Delete',
                 iconCls: 'delete-icon',
                 tooltip: 'Delete Selected',
-                handler: function(){
-                    var store = Ext.getStore('ToDos'),
-                        pagingTB = Ext.getCmp('toDoPagingTB'),
-                        list = Ext.getCmp('toDoList'),
-                        selections = list.getSelectionModel().getSelection();
-
-                    if (selections.length > 0) {
-                        Ext.MessageBox.confirm('Confirm', 'Are you sure?', function(btn) {
-                            if (btn == 'yes'){
-                                store.remove(selections);
-                                store.totalCount -= selections.length;
-                                store.sync();
-                                pagingTB.updateInfo();
-                                list.getSelectionModel().deselectAll();
-                            }
-                        });
-                    }
-                }
+                handler: this.onDeleteClick
             }]
         },
         {
@@ -152,5 +116,63 @@ Ext.define('ToDo.view.todo.List', {
         }];
 
         this.callParent();
+    },
+
+    onAddClick: function()
+    {
+        var pagingTB = Ext.getCmp('toDoPagingTB'),
+            toDoTextField = Ext.getCmp('toDoTextField'),
+            dueDateField = Ext.getCmp('dueDateField'),
+            toDo = toDoTextField.getValue(),
+            dueDate = Ext.util.Format.date(dueDateField.getValue(), 'Y-m-d'),
+            model = new ToDo.model.ToDo({toDo: toDo, dueDate: dueDate}),
+            store = Ext.getStore('ToDos');
+
+        console.log('fewfw');
+        if (toDoTextField.isValid() && dueDateField.isValid())
+        {
+            store.insert(0, model);
+            store.totalCount++;
+            store.sync();
+            pagingTB.updateInfo();
+
+            toDoTextField.reset();
+            dueDateField.reset();
+        }
+    },
+
+    onDeleteClick: function()
+    {
+        var store = Ext.getStore('ToDos'),
+            pagingTB = Ext.getCmp('toDoPagingTB'),
+            list = Ext.getCmp('toDoList'),
+            selections = list.getSelectionModel().getSelection();
+
+        if (selections.length > 0) {
+            Ext.MessageBox.confirm('Confirm', 'Are you sure?', function(btn) {
+                if (btn == 'yes'){
+                    store.remove(selections);
+                    store.totalCount -= selections.length;
+                    store.sync();
+                    pagingTB.updateInfo();
+                    list.getSelectionModel().deselectAll();
+                }
+            });
+        }
+    },
+
+    onRowDeleteClick: function(grid, rowIndex)
+    {
+        var store = Ext.getStore('ToDos'),
+            pagingTB = Ext.getCmp('toDoPagingTB');
+
+        Ext.MessageBox.confirm('Confirm', 'Are you sure?', function(btn) {
+            if (btn == 'yes') {
+                store.remove(store.getAt(rowIndex));
+                store.totalCount--;
+                store.sync();
+                pagingTB.updateInfo();
+            }
+        });
     }
 });
