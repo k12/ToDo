@@ -84,7 +84,8 @@ Ext.define('ToDo.view.todo.List', {
                 name: 'dueDate',
                 id: 'dueDateField',
                 width: 100,
-                format: 'Y-m-d'
+                format: 'Y-m-d',
+                emptyText: 'Y-m-d'
             }, {
                 text: 'Add',
                 iconCls: 'add-icon',
