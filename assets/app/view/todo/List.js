@@ -77,6 +77,7 @@ Ext.define('ToDo.view.todo.List', {
                 name: 'todo',
                 id: 'toDoTextField',
                 allowBlank: false,
+                validateOnBlur: false,
                 width: 250,
                 emptyText: 'What to do, sir?'
             }, {
@@ -99,13 +100,6 @@ Ext.define('ToDo.view.todo.List', {
                 tooltip: 'Delete Selected',
                 action: 'onDeleteClick'
             }]
-        },
-        {
-            xtype: 'pagingtoolbar',
-            store: 'ToDos',
-            dock: 'bottom',
-            displayInfo: true,
-            id: 'toDoPagingTB'
         }];
 
         this.callParent();

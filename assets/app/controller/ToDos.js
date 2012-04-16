@@ -33,8 +33,7 @@ Ext.define('ToDo.controller.ToDos', {
 
     onAddClick: function()
     {
-        var pagingTB = Ext.getCmp('toDoPagingTB'),
-            toDoTextField = Ext.getCmp('toDoTextField'),
+        var toDoTextField = Ext.getCmp('toDoTextField'),
             dueDateField = Ext.getCmp('dueDateField'),
             toDo = toDoTextField.getValue(),
             dueDate = Ext.util.Format.date(dueDateField.getValue(), 'Y-m-d'),
@@ -46,7 +45,6 @@ Ext.define('ToDo.controller.ToDos', {
             store.insert(0, model);
             store.totalCount++;
             store.sync();
-            pagingTB.updateInfo();
 
             toDoTextField.reset();
             dueDateField.reset();
@@ -56,7 +54,6 @@ Ext.define('ToDo.controller.ToDos', {
     onDeleteClick: function()
     {
         var store = Ext.getStore('ToDos'),
-            pagingTB = Ext.getCmp('toDoPagingTB'),
             list = Ext.getCmp('toDoList'),
             selections = list.getSelectionModel().getSelection();
 
@@ -66,7 +63,6 @@ Ext.define('ToDo.controller.ToDos', {
                     store.remove(selections);
                     store.totalCount -= selections.length;
                     store.sync();
-                    pagingTB.updateInfo();
                     list.getSelectionModel().deselectAll();
                 }
             });
@@ -75,16 +71,13 @@ Ext.define('ToDo.controller.ToDos', {
 
     onRowDeleteClick: function(grid, html, rowIndex)
     {
-        console.log(arguments);
-        var store = Ext.getStore('ToDos'),
-            pagingTB = Ext.getCmp('toDoPagingTB');
+        var store = Ext.getStore('ToDos');
 
         Ext.MessageBox.confirm('Confirm', 'Are you sure?', function(btn) {
             if (btn == 'yes') {
                 store.remove(store.getAt(rowIndex));
                 store.totalCount--;
                 store.sync();
-                pagingTB.updateInfo();
             }
         });
     }
