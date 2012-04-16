@@ -4,7 +4,6 @@ Ext.define('ToDo.view.todo.List', {
     alias: 'widget.todolist',
     title: 'What To Do List:',
     enableColumnHide: false,
-    columnLines: true,
     multiSelect: true,
 
     store: 'ToDos',
