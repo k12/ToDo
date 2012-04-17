@@ -27,6 +27,8 @@ Ext.define('ToDo.store.ToDos', {
         },
         listeners: {
             exception: function(proxy, response, operation){
+                console.log(arguments);
+
                 Ext.MessageBox.show({
                     title: 'REMOTE EXCEPTION',
                     msg: 'Error: ' + response.status + '<br />Message: ' + response.statusText,
