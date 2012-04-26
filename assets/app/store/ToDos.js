@@ -3,8 +3,7 @@ Ext.define('ToDo.store.ToDos', {
 
     model: 'ToDo.model.ToDo',
     autoSync: false,
-    pageSize: 25,
-    autoLoad: {start: 0, limit: this.pageSize},
+    autoLoad: true,
 
     proxy: {
         type: 'ajax',
@@ -27,7 +26,7 @@ Ext.define('ToDo.store.ToDos', {
         },
         listeners: {
             exception: function(proxy, response, operation){
-                console.log(arguments);
+                console.log("ToDos store exception: \n" + arguments);
 
                 Ext.MessageBox.show({
                     title: 'REMOTE EXCEPTION',
