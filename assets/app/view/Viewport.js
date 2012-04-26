@@ -13,13 +13,23 @@ Ext.define('ToDo.view.Viewport', {
 
     initComponent: function() {
         this.items = {
-            items: [{
-                xtype: 'todolist',
-                width: 500,
-                id: 'toDoList'
-            }]
+            items: [
+                this.buildToDoGridPanel()
+            ]
         };
 
         this.callParent();
+    },
+
+    buildToDoGridPanel: function() {
+        return {
+            xtype: 'todolist',
+            itemId: 'toDoList',
+            width: 500
+        }
+    },
+
+    getToDoList: function() {
+        return this.getComponent('toDoList');
     }
 });
