@@ -17,12 +17,14 @@ Ext.define('ToDo.store.ToDos', {
             type: 'json',
             root: 'todos',
             totalProperty: 'total',
-            successProperty: 'success'
+            successProperty: 'success',
+            messageProperty : "message"
         },
         writer: {
             type: 'json',
             writeAllFields: true,
-            successProperty: 'success'
+            successProperty: 'success',
+            messageProperty : "message"
         },
         listeners: {
             exception: function(proxy, response, operation){
@@ -30,7 +32,7 @@ Ext.define('ToDo.store.ToDos', {
 
                 Ext.MessageBox.show({
                     title: 'REMOTE EXCEPTION',
-                    msg: 'Error: ' + response.status + '<br />Message: ' + response.statusText,
+                    msg: 'Status Code: ' + response.status + ' ' + response.statusText + '<br /> Error Message: ' + operation.error,
                     icon: Ext.MessageBox.ERROR,
                     buttons: Ext.Msg.OK
                 });
