@@ -7,13 +7,11 @@ class TodoController extends CController
         $this->render('index');
     }
 
-    public function actionRead($page, $start, $limit)
+    public function actionRead()
     {
         if(Yii::app()->request->isAjaxRequest) {
             $todos = ToDo::model()->findAll(array(
                 'select'=>'*',
-                'offset'=>$start,
-                'limit'=>$limit,
                 'order'=>'id DESC'
             ));
 
