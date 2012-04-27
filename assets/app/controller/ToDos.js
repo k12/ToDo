@@ -7,10 +7,10 @@ Ext.define('ToDo.controller.ToDos', {
 
     refs: [{
         ref: 'ToDo',
-        selector: '#toDoTextField'
+        selector: '#toDo'
     }, {
         ref: 'DueDate',
-        selector: '#dueDateField'
+        selector: '#dueDate'
     }, {
         ref: 'Viewport',
         selector: 'viewport'
@@ -18,20 +18,17 @@ Ext.define('ToDo.controller.ToDos', {
 
     init: function() {
         this.control({
-            '#toDoTextField': { //FIXIT: how to join it with #dueDateField
+            '#toDo': { //FIXIT: how to join it with #dueDateField
                 specialkey: this.onSpecialKey
             },
-            '#dueDateField': {
+            '#dueDate': {
                 specialkey: this.onSpecialKey
             },
-            'button[action=onAddClick]': {
+            'button[action=create]': {
                 click: this.create
             },
-            'button[action=onDeleteClick]': {
+            'button[action=delete]': {
                 click: this.delete
-            },
-            'actioncolumn': { //FIXIT: why actioncolumn[action=onRowDeleteClick] doesnt work?
-                click: this.onRowDeleteClick
             }
         });
     },
@@ -77,17 +74,6 @@ Ext.define('ToDo.controller.ToDos', {
                 }
             });
         }
-    },
-
-    onRowDeleteClick: function(grid, html, rowIndex) {
-        var store = this.getToDosStore();
-
-        Ext.MessageBox.confirm('Confirm', 'Are you sure?', function(btn) {
-            if (btn == 'yes') {
-                store.remove(store.getAt(rowIndex));
-                store.totalCount--;
-                store.sync();
-            }
-        });
     }
+
 });
