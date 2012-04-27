@@ -12,11 +12,9 @@ Ext.define('ToDo.view.Viewport', {
     },
 
     initComponent: function() {
-        this.items = {
-            items: [
-                this.buildToDoGridPanel()
-            ]
-        };
+        this.items = [
+            this.buildToDoGridPanel()
+        ];
 
         this.callParent();
     },
