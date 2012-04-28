@@ -13,6 +13,12 @@ Ext.define('ToDo.model.ToDo', {
     ],
 
     logErrors: function(errors) {
-        console.log(errors);
+        var logs = '';
+
+        for (var i=0; i<errors.length; i++) {
+            logs += ('Field ' + errors.items[i].field + ' ' + errors.items[i].message + '\n');
+        }
+
+        console.log(logs);
     }
 });
