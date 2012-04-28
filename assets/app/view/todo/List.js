@@ -1,7 +1,7 @@
 Ext.define('ToDo.view.todo.List', {
     extend: 'Ext.grid.Panel',
 
-    alias: 'widget.todolist',
+    alias: 'widget.toDoList',
     title: 'What To Do List:',
 
     multiSelect: true,

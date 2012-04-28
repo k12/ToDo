@@ -21,7 +21,7 @@ Ext.define('ToDo.view.Viewport', {
 
     buildToDoGridPanel: function() {
         return {
-            xtype: 'todolist',
+            xtype: 'toDoList',
             itemId: 'toDoList',
             width: 500
         }
